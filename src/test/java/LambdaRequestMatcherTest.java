@@ -19,7 +19,7 @@ public class LambdaRequestMatcherTest {
 
     @Test
     public void lambdaStubMatcher() throws Exception {
-        wm.stubFor(requestMatching(`
+        wm.stubFor(requestMatching(
                 request -> request.getUrl().contains("magic")
             ).willReturn(aResponse()));
 
