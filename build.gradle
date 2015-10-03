@@ -1,0 +1,19 @@
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: "idea"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testCompile 'com.github.tomakehurst:wiremock-standalone:2.0.5-beta'
+    testCompile 'junit:junit:4.12'
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+}
+
+
