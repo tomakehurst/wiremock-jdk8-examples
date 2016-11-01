@@ -1,4 +1,5 @@
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.matching.MatchResult;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class LambdaRequestMatcherTest {
     @Test
     public void lambdaStubMatcher() throws Exception {
         wm.stubFor(requestMatching(
-                request -> request.getUrl().contains("magic")
+                request -> MatchResult.of(request.getUrl().contains("magic"))
             ).willReturn(aResponse()));
 
         URL url = new URL("http://localhost:" + wm.port() + "/the-magic-path");
@@ -31,7 +32,9 @@ public class LambdaRequestMatcherTest {
 
     @Test
     public void lambdaVerification() {
-        wm.verify(requestMadeFor(request -> !request.header("My-Header").values().isEmpty()));
+        wm.verify(requestMadeFor(request ->
+            MatchResult.of(!request.header("My-Header").values().isEmpty()))
+        );
     }
 
 }
